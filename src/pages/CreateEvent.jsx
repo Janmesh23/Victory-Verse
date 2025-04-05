@@ -9,7 +9,7 @@ import EventManagerABI from "../contracts/EventManagerABI.json";
 
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
-    const contractAddress = "0xCF055f56093B66EF5c267D2726F584e913a20611"; // Replace this with your actual contract address
+    const contractAddress = "0xcb14B7b438625a7b92F7972242Ef47b9e56d6FE0"; // Replace this with your actual contract address
 
 
     const [event, setEvent] = useState({
@@ -43,7 +43,6 @@ const CreateEvent = () => {
       
           const tx = await contract.createEvent(
             event.name,
-            event.logo,
             ethers.parseEther(event.WinnerTokenAmount),
             ethers.parseEther(event.FanTokenAmount),
             ethers.parseEther(event.FanTokenPrice, "wei"),
@@ -100,16 +99,6 @@ const CreateEvent = () => {
                         name="name"
                         placeholder="Event Name"
                         value={event.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:shadow-lg transition-all duration-300
-"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="logo"
-                        placeholder="logo url"
-                        value={event.logo}
                         onChange={handleChange}
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:shadow-lg transition-all duration-300
 "

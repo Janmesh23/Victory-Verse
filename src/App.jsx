@@ -9,6 +9,7 @@ import CreateEvent from './pages/CreateEvent';
 import TrendingTable from './components/TrendingTable';
 import { ethers } from 'ethers';
 import { WalletProvider } from './context/WalletContext';
+import EventsList from './components/EventList';
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
               <Hero />
               <Navbar/>
               <TrendingTable/>
-              <EventSection/>
+              <EventsList/>
               <Footer />
             </>
           } />
