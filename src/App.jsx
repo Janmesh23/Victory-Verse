@@ -12,6 +12,7 @@ import { WalletProvider } from './context/WalletContext';
 import EventsList from './components/EventList';
 import Register from './pages/Register'
 import NFTAndTokens from './pages/NFTAndTokens';
+import DeclareWinnerPage from './pages/DeclareWinner';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           } />
           <Route path="/create" element={<CreateEvent />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/declare" element={<DeclareWinnerPage />} />
         </Routes>
       </div>
     </Router>

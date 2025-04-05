@@ -40,6 +40,12 @@ const Hero = () => {
               <span className="relative z-10">Register</span>
             </button>
           </Link>
+          <Link to='/declare'>
+            <button className="relative inline-block px-8 py-3 font-semibold text-blue-400 border border-blue-500 rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
+              <span className="absolute inset-0 w-full h-full transition-transform duration-500 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500 opacity-10 blur-xl"></span>
+              <span className="relative z-10">My events</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
