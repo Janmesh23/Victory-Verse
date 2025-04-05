@@ -36,6 +36,7 @@ const RegisterEvents = () => {
             eventName: eventData.eventName,
             // Assuming your contract stores the logo URL as img_uri
             img_uri: eventData.img_uri,
+            description: eventData.description,
             // Add more fields if needed...
           });
         }
@@ -120,6 +121,7 @@ const RegisterEvents = () => {
               />
               <div className="p-4 flex flex-col gap-2">
                 <h3 className="text-xl font-semibold text-cyan-300">{event.eventName}</h3>
+                <h6 className="text-sm font-semibold text-white">{event.description}</h6>
                 <button
                   onClick={() => handleRegister(event.id, event.eventName)}
                   className="mt-4 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-600 hover:text-white transition-all duration-300 rounded-xl"
