@@ -54,7 +54,8 @@ const Register = () => {
 
             <div className="relative z-5 min-h-screen text-white px-6 py-10">
 
-                <h1 className="text-4xl font-bold mb-10 text-center text-cyan-400 font-SDGlitch">Register for Events</h1>
+
+                <h1 className="text-6xl font-bold mb-10 text-center text-cyan-400 font-SDGlitch mt-10 ">Register for Events</h1>
 
                 <div className="flex flex-col md:flex-row mb-10 items-start md:items-center gap-6">
                     <input
@@ -89,6 +90,8 @@ const Register = () => {
                     ))}
                 </div>
             </div>
+
+
         </>
     );
 };
