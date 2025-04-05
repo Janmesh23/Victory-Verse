@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  font-family: 'General-sans',sans-serif;
+  width: 100dvw;
+  background-color: #10172a;
+  overflow-x: hidden;
+}
+
+@layer base{
+  @font-face {
+    font-family: 'circular-web';
+    src: url('/fonts/circularweb-book.woff2') format('woff2')
+  }
+
+  @font-face {
+    font-family: 'robert-regular';
+    src: url('/fonts/robert-regular.woff2') format('woff2')
+  }
+
+  @font-face {
+    font-family: 'general';
+    src: url('/fonts/general.woff2') format('woff2')
+  }
+
+  @font-face {
+    font-family: 'robert-medium';
+    src: url('/fonts/robert-medium.woff2') format('woff2')
+  }
+
+  @font-face {
+    font-family: 'zentry-regular';
+    src: url('/fonts/zentry-regular.woff2') format('woff2')
+  }
+
+  @font-face {
+    font-family: 'SDGlitch';
+    src: url('/fonts/SDGlitch.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+.glitch {
+  position: relative;
+  color: #0ff;
+  font-weight: bold;
+  animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #f0f;
+  clip: rect(0, 900px, 0, 0);
+}
+
+.glitch::before {
+  animation: glitch-top 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  animation: glitch-bottom 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+  100% {
+    transform: skew(2deg);
+  }
+}
+
+@keyframes glitch-top {
+  0% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: translate(-3px, -3px);
+  }
+  50% {
+    clip: rect(0, 9999px, 5px, 0);
+    transform: translate(3px, 3px);
+  }
+  100% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: translate(-3px, 1px);
+  }
+}
+
+@keyframes glitch-bottom {
+  0% {
+    clip: rect(5px, 9999px, 9999px, 0);
+    transform: translate(3px, 3px);
+  }
+  50% {
+    clip: rect(2px, 9999px, 9999px, 0);
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    clip: rect(5px, 9999px, 9999px, 0);
+    transform: translate(2px, -1px);
+  }
+}
