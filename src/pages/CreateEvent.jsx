@@ -37,16 +37,16 @@ const CreateEvent = () => {
         }
       
         try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
+          const _provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await _provider.getSigner();
           const contract = new ethers.Contract(contractAddress, EventManagerABI, signer);
       
           const tx = await contract.createEvent(
             event.name,
             event.logo,
-            ethers.utils.parseUnits(event.WinnerTokenAmount),
-            ethers.utils.parseUnits(event.FanTokenAmount),
-            ethers.utils.parseUnits(event.FanTokenPrice, "wei"),
+            ethers.parseEther(event.WinnerTokenAmount),
+            ethers.parseEther(event.FanTokenAmount),
+            ethers.parseEther(event.FanTokenPrice, "wei"),
           );
       
           await tx.wait();
