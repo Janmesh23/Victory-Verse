@@ -29,7 +29,7 @@ const App = () => {
             </>
           } />
           <Route path="/create" element={<CreateEvent />} />
-          <Route path="/register" element={<EventsList />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>

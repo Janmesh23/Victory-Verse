@@ -40,40 +40,29 @@ const CreateEvent = () => {
         }
       
         try {
-          const _provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await _provider.getSigner();
-          const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
+            const _provider = new ethers.BrowserProvider(window.ethereum);
+            const signer = await _provider.getSigner();
+            const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
+            const url = await uploadToPinata(bannerFile);
+            setUrl(url);
+            console.log(url);
       
-          const tx = await contract.createEvent(
-            event.name,
-            ethers.parseEther(event.WinnerTokenAmount),
-            ethers.parseEther(event.FanTokenAmount),
-            ethers.parseEther(event.FanTokenPrice, "wei"),
-            url,
-            event.description
-          );
-      
-          await tx.wait();
-          alert("Event created successfully!");
+            const tx = await contract.createEvent(
+                event.name,
+                ethers.parseEther(event.WinnerTokenAmount),
+                ethers.parseEther(event.FanTokenAmount),
+                ethers.parseEther(event.FanTokenPrice, "wei"),
+                url,
+                event.description
+            );
+        
+            await tx.wait();
+            alert("Event created successfully!");
         } catch (error) {
           console.error("Error creating event:", error);
           alert("Transaction failed. See console.");
         }
-      };
-
-      const handleUpload = async() => {
-        try {
-            const url = await uploadToPinata(bannerFile);
-            setUrl(url);
-            console.log(url);
-        } catch (error) {
-            console.log(error);
-        }
-
-      }
-
-
-      
+    };      
 
     return (
         <>
@@ -173,7 +162,7 @@ const CreateEvent = () => {
                             onChange={(e) => setBannerFile(e.target.files[0])}
                             className="block w-full text-sm text-gray-400 bg-black bg-opacity-30 border border-gray-600 rounded-lg p-2"
                         />
-                        <button onClick={handleUpload} className='bg-blue-400 rounded-md p-3'>Upload</button>
+                        {/* <button onClick={handleUpload} className='bg-blue-400 rounded-md p-3'>Upload</button> */}
                     </div>
 
 

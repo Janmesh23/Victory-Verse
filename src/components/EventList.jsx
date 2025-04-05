@@ -26,7 +26,7 @@ const EventsList = () => {
             id: eventData.id.toString(),
             creator: eventData.creator,
             eventName: eventData.eventName,
-            eventLogo: eventData.img_uri,
+            img_uri: eventData.img_uri,
             winnerDeclared: eventData.winnerDeclared,
             winner: eventData.winner,
             winnerTokenAmount: eventData.winnerTokenAmount.toString(),
