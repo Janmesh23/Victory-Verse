@@ -9,6 +9,7 @@ import CreateEvent from './pages/CreateEvent';
 import TrendingTable from './components/TrendingTable';
 import { ethers } from 'ethers';
 import { WalletProvider } from './context/WalletContext';
+import Register from './pages/Register';
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
             </>
           } />
           <Route path="/create" element={<CreateEvent />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>
