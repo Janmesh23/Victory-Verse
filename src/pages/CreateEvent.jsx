@@ -39,7 +39,7 @@ const CreateEvent = () => {
         try {
           const _provider = new ethers.BrowserProvider(window.ethereum);
           const signer = await _provider.getSigner();
-          const contract = new ethers.Contract(contractAddress, EventManagerABI, signer);
+          const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
       
           const tx = await contract.createEvent(
             event.name,
