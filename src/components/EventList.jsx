@@ -4,7 +4,7 @@ import EventManagerABI from '../contracts/EventManagerABI.json';
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
-  const contractAddress = "0xcb14B7b438625a7b92F7972242Ef47b9e56d6FE0";
+  const contractAddress = "0xF96ef87aCC8F49a04D1e2BDF4De3949a79deB7C3";
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -26,7 +26,7 @@ const EventsList = () => {
             id: eventData.id.toString(),
             creator: eventData.creator,
             eventName: eventData.eventName,
-            eventLogo: eventData.eventLogo,
+            eventLogo: eventData.img_uri,
             winnerDeclared: eventData.winnerDeclared,
             winner: eventData.winner,
             winnerTokenAmount: eventData.winnerTokenAmount.toString(),

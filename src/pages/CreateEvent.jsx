@@ -5,11 +5,14 @@ import bgImage from '../assets/event-bg.jpg';
 import { WalletContext } from '../context/WalletContext';
 import { ethers } from "ethers";
 import EventManagerABI from "../contracts/EventManagerABI.json";
+import { uploadToPinata } from "../utils/UploadToPinata";
 
 
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
-    const contractAddress = "0xcb14B7b438625a7b92F7972242Ef47b9e56d6FE0"; // Replace this with your actual contract address
+    const [bannerFile, setBannerFile] = useState(null);
+    const contractAddress = "0xF96ef87aCC8F49a04D1e2BDF4De3949a79deB7C3";
+    const [url, setUrl] = useState("");
 
 
     const [event, setEvent] = useState({
@@ -46,6 +49,8 @@ const CreateEvent = () => {
             ethers.parseEther(event.WinnerTokenAmount),
             ethers.parseEther(event.FanTokenAmount),
             ethers.parseEther(event.FanTokenPrice, "wei"),
+            url,
+            event.description
           );
       
           await tx.wait();
@@ -55,6 +60,19 @@ const CreateEvent = () => {
           alert("Transaction failed. See console.");
         }
       };
+
+      const handleUpload = async() => {
+        try {
+            const url = await uploadToPinata(bannerFile);
+            setUrl(url);
+            console.log(url);
+        } catch (error) {
+            console.log(error);
+        }
+
+      }
+
+
       
 
     return (
@@ -105,34 +123,6 @@ const CreateEvent = () => {
                         required
                     />
 
-                    {/* <div className="flex flex-col md:flex-row gap-4">
-                        <input
-                            type="date"
-                            name="date"
-                            value={event.date}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            required
-                        />
-                        <input
-                            type="time"
-                            name="time"
-                            value={event.time}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            required
-                        />
-                    </div>
-
-                    <input
-                        type="text"
-                        name="location"
-                        placeholder="Location / Online Link"
-                        value={event.location}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        required
-                    /> */}
 
                     <input
                         type="number"
@@ -164,7 +154,7 @@ const CreateEvent = () => {
                         required
                     />
 
-                    {/* <textarea
+                    <textarea
                         name="description"
                         placeholder="Event Description"
                         value={event.description}
@@ -172,16 +162,18 @@ const CreateEvent = () => {
                         rows="4"
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                         required
-                    ></textarea> */}
+                    ></textarea>
 
                     {/* Future banner upload option */}
-                    <div>
+                    <div className='flex justify-between items-center'>
                         <label className="block text-sm text-gray-400 mb-1">Upload Banner (optional)</label>
                         <input
                             type="file"
                             accept="image/*"
+                            onChange={(e) => setBannerFile(e.target.files[0])}
                             className="block w-full text-sm text-gray-400 bg-black bg-opacity-30 border border-gray-600 rounded-lg p-2"
                         />
+                        <button onClick={handleUpload} className='bg-blue-400 rounded-md p-3'>Upload</button>
                     </div>
 
 

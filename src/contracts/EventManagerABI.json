@@ -41,6 +41,16 @@
                     "internalType": "uint256",
                     "name": "_fanTokenPrice",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_img_uri",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_description",
+                    "type": "string"
                 }
             ],
             "name": "createEvent",
@@ -654,7 +664,7 @@
                 },
                 {
                     "internalType": "string",
-                    "name": "uri",
+                    "name": "img_uri",
                     "type": "string"
                 },
                 {
@@ -686,6 +696,11 @@
                     "internalType": "address",
                     "name": "fanTokenAddress",
                     "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "description",
+                    "type": "string"
                 }
             ],
             "stateMutability": "view",
@@ -714,7 +729,7 @@
                         },
                         {
                             "internalType": "string",
-                            "name": "uri",
+                            "name": "img_uri",
                             "type": "string"
                         },
                         {
@@ -746,6 +761,11 @@
                             "internalType": "address",
                             "name": "fanTokenAddress",
                             "type": "address"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "description",
+                            "type": "string"
                         }
                     ],
                     "internalType": "struct EventManager.EventInfo[]",

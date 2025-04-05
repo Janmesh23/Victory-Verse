@@ -10,7 +10,7 @@ import TrendingTable from './components/TrendingTable';
 import { ethers } from 'ethers';
 import { WalletProvider } from './context/WalletContext';
 import EventsList from './components/EventList';
-
+import Register from './pages/Register'
 
 
 const App = () => {
@@ -24,11 +24,12 @@ const App = () => {
               <Hero />
               <Navbar/>
               <TrendingTable/>
-              <EventsList/>
+              <EventSection/>
               <Footer />
             </>
           } />
           <Route path="/create" element={<CreateEvent />} />
+          <Route path="/register" element={<EventsList />} />
         </Routes>
       </div>
     </Router>
