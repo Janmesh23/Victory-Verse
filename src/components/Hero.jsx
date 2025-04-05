@@ -25,14 +25,23 @@ const Hero = () => {
         <p className="text-xl md:text-2xl">Revolutionizing event rewards with NFTs & Fan Tokens</p>
         <br />
         <br />
-        {/* BUTTON */}
-        <Link to='/create'>
-        <button className="relative inline-block px-8 py-3 font-semibold text-white rounded-xl group transition-all duration-300 overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 hover:scale-105 hover:shadow-2xl">
-          <span className="absolute inset-0 w-full h-full transition-transform duration-500 ease-out transform translate-x-full group-hover:translate-x-0 bg-white opacity-10 blur-xl"></span>
-          <span className="relative z-10">Create Event </span>
-        </button>
-        </Link>
-      </div>  
+        {/* BUTTONS */}
+        <div className="flex flex-row gap-6 mt-6">
+          <Link to='/create'>
+            <button className="relative inline-block px-8 py-3 font-semibold text-white rounded-xl group transition-all duration-300 overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 hover:scale-105 hover:shadow-2xl">
+              <span className="absolute inset-0 w-full h-full transition-transform duration-500 ease-out transform translate-x-full group-hover:translate-x-0 bg-white opacity-10 blur-xl"></span>
+              <span className="relative z-10">Create Event</span>
+            </button>
+          </Link>
+
+          <Link to='/register'>
+            <button className="relative inline-block px-8 py-3 font-semibold text-blue-400 border border-blue-500 rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
+              <span className="absolute inset-0 w-full h-full transition-transform duration-500 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500 opacity-10 blur-xl"></span>
+              <span className="relative z-10">Register</span>
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

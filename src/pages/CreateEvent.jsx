@@ -5,10 +5,12 @@ import bgImage from '../assets/event-bg.jpg';
 import { WalletContext } from '../context/WalletContext';
 import { ethers } from "ethers";
 import EventManagerABI from "../contracts/EventManagerABI.json";
+import { uploadToPinata } from "../utils/UploadToPinata";
 
 
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
+    const [bannerFile, setBannerFile] = useState(null);
     const contractAddress = "0xCF055f56093B66EF5c267D2726F584e913a20611"; // Replace this with your actual contract address
 
 
@@ -116,7 +118,7 @@ const CreateEvent = () => {
                         required
                     />
 
-                    {/* <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex flex-col md:flex-row gap-4">
                         <input
                             type="date"
                             name="date"
@@ -143,7 +145,7 @@ const CreateEvent = () => {
                         onChange={handleChange}
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                         required
-                    /> */}
+                    />
 
                     <input
                         type="number"
@@ -175,7 +177,7 @@ const CreateEvent = () => {
                         required
                     />
 
-                    {/* <textarea
+                    <textarea
                         name="description"
                         placeholder="Event Description"
                         value={event.description}
@@ -183,7 +185,7 @@ const CreateEvent = () => {
                         rows="4"
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                         required
-                    ></textarea> */}
+                    ></textarea>
 
                     {/* Future banner upload option */}
                     <div>
@@ -191,6 +193,7 @@ const CreateEvent = () => {
                         <input
                             type="file"
                             accept="image/*"
+                            onChange={(e) => setBannerFile(e.target.files[0])}
                             className="block w-full text-sm text-gray-400 bg-black bg-opacity-30 border border-gray-600 rounded-lg p-2"
                         />
                     </div>
