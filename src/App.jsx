@@ -11,6 +11,7 @@ import { ethers } from 'ethers';
 import { WalletProvider } from './context/WalletContext';
 import EventsList from './components/EventList';
 import Register from './pages/Register'
+import NFTAndTokens from './pages/NFTAndTokens';
 
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
             </>
           } />
           <Route path="/create" element={<CreateEvent />} />
-          <Route path="/register" element={<EventsList />} />
+          <Route path="/register" element={<NFTAndTokens />} />
         </Routes>
       </div>
     </Router>
