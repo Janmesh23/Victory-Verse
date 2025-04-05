@@ -1,11 +1,13 @@
 
 import './Navbar.css'
 import logo1 from '../assets/logo1.png'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { WalletContext } from '../context/WalletContext';
 
 
 const Navbar = () => {
-  const [walletAddress, setWalletAddress] = useState('');
+  const { walletAddress, setWalletAddress } = useContext(WalletContext);
+
 
   // Check if MetaMask is already connected
   useEffect(() => {
@@ -39,7 +41,7 @@ const Navbar = () => {
         <li>Home</li>
         <li><button
           onClick={connectWallet}
-          className="px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition"
+          className="px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition cursor-pointer"
         >
           {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
         </button></li>

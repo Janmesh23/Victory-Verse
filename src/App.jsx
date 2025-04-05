@@ -8,12 +8,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateEvent from './pages/CreateEvent';
 import TrendingTable from './components/TrendingTable';
 import { ethers } from 'ethers';
-
+import { WalletProvider } from './context/WalletContext';
 
 
 
 const App = () => {
   return (
+    <WalletProvider>
     <Router>
       <div className="min-h-screen flex flex-col">
         <Routes>
@@ -30,6 +31,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    </WalletProvider>
   )
 }
 

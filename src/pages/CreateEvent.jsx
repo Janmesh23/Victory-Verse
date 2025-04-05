@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import bgImage from '../assets/event-bg.jpg';
+import { WalletContext } from '../context/WalletContext';
+import { ethers } from "ethers";
+import EventManagerABI from "../contracts/EventManagerABI.json";
 
 
 const CreateEvent = () => {
+    const { walletAddress } = useContext(WalletContext);
+    const contractAddress = "0xCF055f56093B66EF5c267D2726F584e913a20611"; // Replace this with your actual contract address
+
+
     const [event, setEvent] = useState({
         name: '',
+        logo:'',
         date: '',
         time: '',
         location: '',
+        WinnerTokenAmount: '',
+        FanTokenAmount: '',
+        FanTokenPrice: '',
         description: '',
     });
 
@@ -17,11 +28,35 @@ const CreateEvent = () => {
         setEvent({ ...event, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Event Submitted:", event);
-        // Add logic here to push to backend or smart contract
-    };
+      
+        if (!walletAddress) {
+          alert("Please connect your wallet first!");
+          return;
+        }
+      
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const signer = provider.getSigner();
+          const contract = new ethers.Contract(contractAddress, EventManagerABI, signer);
+      
+          const tx = await contract.createEvent(
+            event.name,
+            event.logo,
+            ethers.utils.parseUnits(event.WinnerTokenAmount),
+            ethers.utils.parseUnits(event.FanTokenAmount),
+            ethers.utils.parseUnits(event.FanTokenPrice, "wei"),
+          );
+      
+          await tx.wait();
+          alert("Event created successfully!");
+        } catch (error) {
+          console.error("Error creating event:", error);
+          alert("Transaction failed. See console.");
+        }
+      };
+      
 
     return (
         <>
@@ -56,7 +91,7 @@ const CreateEvent = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="backdrop-blur-md bg-black bg-opacity-50 border border-purple-700 rounded-2xl shadow-2xl px-8 py-10 w-full max-w-xl space-y-6 mr-12 mt-5"
+                    className="backdrop-blur-md bg-black bg-opacity-50 border border-purple-700 rounded-2xl shadow-2xl px-8 py-10 w-full max-w-xl space-y-6 mr-12 mt-20"
                 >
                     <h2 className="text-3xl font-semibold text-center text-purple-400">Create New Event</h2>
 
@@ -70,8 +105,18 @@ const CreateEvent = () => {
 "
                         required
                     />
+                    <input
+                        type="text"
+                        name="logo"
+                        placeholder="logo url"
+                        value={event.logo}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:shadow-lg transition-all duration-300
+"
+                        required
+                    />
 
-                    <div className="flex flex-col md:flex-row gap-4">
+                    {/* <div className="flex flex-col md:flex-row gap-4">
                         <input
                             type="date"
                             name="date"
@@ -98,9 +143,39 @@ const CreateEvent = () => {
                         onChange={handleChange}
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                         required
+                    /> */}
+
+                    <input
+                        type="number"
+                        name="WinnerTokenAmount"
+                        placeholder="Winner Token Amount"
+                        value={event.WinnerTokenAmount}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        required
                     />
 
-                    <textarea
+                    <input
+                        type="number"
+                        name="FanTokenAmount"
+                        placeholder="Fan Token Amount"
+                        value={event.FanTokenAmount}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        required
+                    />
+
+                    <input
+                        type="number"
+                        name="FanTokenPrice"
+                        placeholder="Fan Token Price"
+                        value={event.FanTokenPrice}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        required
+                    />
+
+                    {/* <textarea
                         name="description"
                         placeholder="Event Description"
                         value={event.description}
@@ -108,7 +183,7 @@ const CreateEvent = () => {
                         rows="4"
                         className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                         required
-                    ></textarea>
+                    ></textarea> */}
 
                     {/* Future banner upload option */}
                     <div>
@@ -124,8 +199,9 @@ const CreateEvent = () => {
                     <button
                         type="submit"
                         className="w-full py-2 bg-purple-600 hover:bg-purple-700 transition rounded-lg font-semibold shadow-md"
+                        
                     >
-                        Submit Event
+                        Create Event
                     </button>
                 </motion.form>
             </div >
