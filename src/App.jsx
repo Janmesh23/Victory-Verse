@@ -25,7 +25,6 @@ const App = () => {
             <>
               <Hero />
               <Navbar/>
-              <TrendingTable/>
               <EventSection/>
               <Footer />
             </>

@@ -3,6 +3,7 @@ import './Navbar.css'
 import logo1 from '../assets/logo1.png'
 import React, { useState, useEffect, useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -38,17 +39,29 @@ const Navbar = () => {
     <nav className='container'>
       <img src={logo1} alt="" className='logo' />
       <ul>
-        <li>Home</li>
-        <li><button
+        <li><Link to='/'>
+            <button className="relative inline-block px-8 py-3 font-semibold rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
+              <span className="relative z-10">Home</span>
+            </button>
+          </Link></li>
+
+        <li><Link to='/myevents'>
+            <button className="relative inline-block px-8 py-3 font-semibold rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
+              <span className="relative z-10">My events</span>
+            </button>
+          </Link></li>
+        <li><Link to='/nftandtokens'>
+            <button className="relative inline-block px-8 py-3 font-semibold rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
+              <span className="relative z-10">NFTs & Tokens</span>
+            </button>
+          </Link></li>
+          <li><button
           onClick={connectWallet}
-          className="px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition cursor-pointer"
+          className="px-4 py-2 text-blue-400 border border-blue-500 rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl"
         >
           {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
         </button></li>
-        <li>Winners</li>
-        <li>AboutUs</li>
-
-        <li><button className='btn'>Contact Us</button></li>
+        
 
       </ul>
     </nav>
