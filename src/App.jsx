@@ -31,7 +31,7 @@ const App = () => {
             </>
           } />
           <Route path="/create" element={<CreateEvent />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<NFTAndTokens />} />
           <Route path="/myevents" element={<MyEvents />} />
         </Routes>
       </div>
