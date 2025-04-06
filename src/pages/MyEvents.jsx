@@ -1,4 +1,3 @@
-;
 
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
@@ -120,11 +119,23 @@ const MyEvents = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white p-8">
-        <h1 className="text-4xl font-bold text-center text-cyan-400 mb-10 font-SDGlitch">My Events</h1>
 
-        <section className="mb-12">
-          <h2 className="text-2xl mb-6 text-cyan-300">🎯 Created Events</h2>
+      <div
+        className="relative min-h-screen text-white p-8"
+        style={{
+          backgroundImage: `url('https://img.freepik.com/free-vector/glowing-hexagonal-pattern-digital-background-web-data-visualization_1017-49560.jpg')`,
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed', // 💫 This makes it stay while scrolling
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        }}
+      >
+
+
+        <section className="mb-12 mt-12">
+        <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10">
+          <h2 className="text-5xl  text-cyan-300 font-bold text-center ">Created Events</h2>
+        </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {createdEvents.map((event) => (
               <div
@@ -159,7 +170,9 @@ const MyEvents = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl mb-6 text-cyan-300">🤝 Participated Events</h2>
+        <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10">
+          <h2 className="text-5xl  text-cyan-300 font-bold text-center ">Participated Events</h2>
+        </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {participatedEvents.map((event) => (
               <div
