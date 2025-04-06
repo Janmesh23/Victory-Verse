@@ -17,10 +17,10 @@ const Hero = () => {
       />
 
       {/* Overlay (optional, to make text pop) */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-5"></div>
 
       {/* Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4 mt-5">
+      <div className="relative z-0 flex flex-col items-center justify-center h-full text-white text-center px-4 mt-5">
         <h1 className="text-5xl md:text-7xl font-bold mb-4">Welcome to <span >VictoryVerse</span></h1>
         <p className="text-xl md:text-2xl">Revolutionizing event rewards with NFTs & Fan Tokens</p>
         <br />

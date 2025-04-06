@@ -23,9 +23,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={
             <>
-              <Hero />
               <Navbar/>
-              <EventSection/>
+              <Hero />
+              
               <Footer />
             </>
           } />

@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className='container'>
       <img src={logo1} alt="" className='logo' />
       <ul>
-        <li><Link to='/'>
+        <li className='cursor-pointer'><Link to='/'>
             <button className="relative inline-block px-8 py-3 font-semibold rounded-xl group transition-all duration-300 overflow-hidden hover:scale-105 hover:shadow-blue-500/30 hover:shadow-xl">
               <span className="relative z-10">Home</span>
             </button>
