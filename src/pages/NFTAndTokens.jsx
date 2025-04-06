@@ -221,31 +221,32 @@ const NFTAndTokens = () => {
     <>
       <Navbar />
 
-      <div className="relative z-10 px-6 py-10 min-h-screen text-white bg-gradient-to-b from-black via-gray-900 to-black">
-        <h1 className="text-4xl text-center font-bold text-cyan-400 mb-12 font-SDGlitch">
-          NFTs & Fan Tokens Marketplace
-        </h1>
+      <div className="relative z-5 px-6 py-10 min-h-screen text-white"
+        style={{
+          backgroundImage: "url('https://c4.wallpaperflare.com/wallpaper/904/1022/350/hud-1-wallpaper-preview.jpg')",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed", // <-- this makes it stay in place when scrolling
+          backgroundPosition: "center",
+        }}
+      >
+        <section className="mb-12 mt-10 border-2 border-black-700 rounded-3xl p-6 shadow-cyan-500/20 shadow-lg  mt-15">
 
-        {/* Winner NFTs Section */}
-        <h2 className="text-2xl mb-6 text-cyan-300">🏆 Winner NFTs</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16">
-          {events
-            .filter((e) => e.winner !== "0x0000000000000000000000000000000000000000")
-            .map((event) => (
-              <div key={event.id} className="bg-black bg-opacity-50 rounded-2xl border border-cyan-700 shadow-md overflow-hidden">
-                <img src={event.img} alt={event.name} className="w-full h-48 object-cover rounded-t-2xl" />
-                <div className="p-4">
-                  <h3 className="text-xl text-cyan-300 font-semibold">{event.name}</h3>
-                  <p className="text-gray-400 text-sm mt-1">Winner: {event.winner.slice(0, 6)}...{event.winner.slice(-4)}</p>
-                  <p className="text-xs text-gray-500 mt-1">NFT ID: #{event.id}</p>
-                </div>
-              </div>
-            ))}
-        </div>
+          <div className="flex justify-center mb-6">
+            <h2 className="text-6xl font-circular-web font-bold text-black-300 relative animate-pulse-glow">
+              <span className="absolute -inset-2 bg-black-500 opacity-20 blur-2xl rounded-xl"></span>
+              <span className="relative z-10 font-robert-medium">Fan Tokens & NFT's</span>
+            </h2>
+          </div>
+        </section>
+
+
 
         {/* Fan Tokens Section */}
-        <h2 className="text-2xl mb-6 text-cyan-300">💰 Fan Tokens</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10">
+          <h2 className="text-5xl  text-cyan-300 font-bold text-center ">Fan Tokens</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
           {events.map((event) => (
             <div key={event.id} className="bg-black bg-opacity-40 rounded-2xl border border-cyan-500 shadow-md p-5 flex flex-col justify-between">
               <img src={event.img} alt={event.name} className="w-full h-48 object-cover rounded-t-2xl" />
@@ -274,6 +275,26 @@ const NFTAndTokens = () => {
               </div>
             </div>
           ))}
+        </div>
+
+
+        {/* Winner NFTs Section */}
+        <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10 mt-10">
+          <h2 className="text-5xl  text-cyan-300 font-bold text-center ">Winning NFTs</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8 mb-16">
+          {events
+            .filter((e) => e.winner !== "0x0000000000000000000000000000000000000000")
+            .map((event) => (
+              <div key={event.id} className="bg-black bg-opacity-50 rounded-2xl border border-cyan-700 shadow-md overflow-hidden">
+                <img src={event.img} alt={event.name} className="w-full h-48 object-cover rounded-t-2xl" />
+                <div className="p-4">
+                  <h3 className="text-xl text-cyan-300 font-semibold">{event.name}</h3>
+                  <p className="text-gray-400 text-sm mt-1">Winner: {event.winner.slice(0, 6)}...{event.winner.slice(-4)}</p>
+                  <p className="text-xs text-gray-500 mt-1">NFT ID: #{event.id}</p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </>
