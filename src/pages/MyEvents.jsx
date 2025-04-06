@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import Navbar from "../components/Navbar";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
 
 // Helper to convert an IPFS URI (ipfs://CID) to a gateway URL.
 const convertToGatewayUrl = (ipfsUri) => {
@@ -20,7 +20,7 @@ const fetchImageFromMetadata = async (metadataURI) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const metadata = await response.json();
-    return metadata.image; // Return the image URL stored in metadata.
+    return metadata.image; 
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return null;
@@ -49,7 +49,7 @@ const MyEvents = () => {
 
         for (let i = 1; i <= count; i++) {
           const event = await contract.events(i);
-          // Fetch image from event metadata URI
+
           const image = await fetchImageFromMetadata(event.meta_uri);
           const eventData = {
             id: i,
@@ -58,7 +58,7 @@ const MyEvents = () => {
             winner: event.winner,
             winnerDeclared: event.winnerDeclared,
             meta_uri: event.meta_uri,
-            img: image, // store each event's image separately
+            img: image, 
           };
 
           if (event.creator.toLowerCase() === userAddress.toLowerCase()) {
@@ -125,7 +125,7 @@ const MyEvents = () => {
         style={{
           backgroundImage: `url('https://img.freepik.com/free-vector/glowing-hexagonal-pattern-digital-background-web-data-visualization_1017-49560.jpg')`,
           backgroundSize: 'cover',
-          backgroundAttachment: 'fixed', // 💫 This makes it stay while scrolling
+          backgroundAttachment: 'fixed', 
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
         }}

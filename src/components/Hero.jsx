@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
         src={herobg}
@@ -16,16 +15,13 @@ const Hero = () => {
         playsInline
       />
 
-      {/* Overlay (optional, to make text pop) */}
       <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-5"></div>
 
-      {/* Content */}
       <div className="relative z-0 flex flex-col items-center justify-center h-full text-white text-center px-4 mt-5">
         <h1 className="text-5xl md:text-7xl font-bold mb-4">Welcome to <span >VictoryVerse</span></h1>
         <p className="text-xl md:text-2xl">Revolutionizing event rewards with NFTs & Fan Tokens</p>
         <br />
         <br />
-        {/* BUTTONS */}
         <div className="flex flex-row gap-6 mt-6">
           <Link to='/create'>
             <button className="relative inline-block px-8 py-3 font-semibold text-white rounded-xl group transition-all duration-300 overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 hover:scale-105 hover:shadow-2xl">

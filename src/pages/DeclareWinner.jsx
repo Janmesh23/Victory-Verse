@@ -6,8 +6,7 @@ import Navbar from "../components/Navbar";
 import { WalletContext } from "../context/WalletContext";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-// Replace with your deployed contract address
-const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
 
 // Convert an IPFS URI (ipfs://CID) to a gateway URL (using ipfs.io)
 const convertToGatewayUrl = (ipfsUri) => {
@@ -23,7 +22,7 @@ const fetchImageFromMetadata = async (metadataURI) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const metadata = await response.json();
-    return metadata.image; // Return the image URL stored in metadata
+    return metadata.image; 
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return null;
@@ -38,7 +37,6 @@ const DeclareWinnerPage = () => {
   const [selectedWinner, setSelectedWinner] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Fetch events created by the connected wallet (where winner is not declared)
   useEffect(() => {
     const fetchMyEvents = async () => {
       if (!window.ethereum || !walletAddress) return;
@@ -52,17 +50,17 @@ const DeclareWinnerPage = () => {
         let events = [];
         for (let i = 1; i <= eventCount; i++) {
           const eventData = await contract.events(i);
-          // Only include events created by the user and without a declared winner
+
           if (
             eventData.creator.toLowerCase() === userAddress.toLowerCase() &&
             !eventData.winnerDeclared
           ) {
-            // Fetch the image URL from the event's metadata URI
+
             const imageUrl = await fetchImageFromMetadata(eventData.meta_uri);
             events.push({
               id: eventData.id.toString(),
               eventName: eventData.eventName,
-              img: imageUrl, // Store the fetched image URL
+              img: imageUrl, 
               meta_uri: eventData.meta_uri,
             });
           }
@@ -76,7 +74,6 @@ const DeclareWinnerPage = () => {
     fetchMyEvents();
   }, [walletAddress]);
 
-  // When "Declare Winner" is clicked, fetch the participants for that event
   const handleDeclareClick = async (eventId) => {
     if (!window.ethereum) return;
     try {
@@ -92,12 +89,10 @@ const DeclareWinnerPage = () => {
     }
   };
 
-  // Set selected winner address when clicked
   const handleWinnerSelection = (winnerAddress) => {
     setSelectedWinner(winnerAddress);
   };
 
-  // Confirm winner selection and call contract.declareWinner
   const handleConfirmWinner = async () => {
     if (!selectedEventId || !selectedWinner) {
       alert("Please select an event and a winner.");
@@ -109,12 +104,10 @@ const DeclareWinnerPage = () => {
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
 
-      // Call the contract's declareWinner function (which mints NFT and tokens as per your contract logic)
       const tx = await contract.declareWinner(selectedEventId, selectedWinner);
       await tx.wait();
       alert("Winner declared successfully!");
 
-      // Optionally remove the event from the list or refresh events
       setMyEvents(myEvents.filter((event) => event.id !== selectedEventId.toString()));
       setSelectedEventId(null);
       setParticipants([]);
@@ -155,7 +148,6 @@ const DeclareWinnerPage = () => {
           </div>
         )}
 
-        {/* Participant Selection Section */}
         {selectedEventId && (
           <div className="mt-10 bg-gray-800 p-6 rounded shadow-lg">
             <h2 className="text-3xl font-bold mb-4">

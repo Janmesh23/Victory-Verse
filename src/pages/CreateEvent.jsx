@@ -7,19 +7,19 @@ import bgImage from "../assets/event-bg.jpg";
 import { WalletContext } from "../context/WalletContext";
 import { ethers } from "ethers";
 import EventManagerABI from "../contracts/EventManagerABI.json";
-import { uploadToPinata } from "../utils/UploadToPinata"; // Your file upload function
+import { uploadToPinata } from "../utils/UploadToPinata"; 
 import { createAndUploadMetadata } from "../utils/UploadMetadataToPinata";
 
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
     const [bannerFile, setBannerFile] = useState(null);
-    const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+    const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
     const [metadataCID, setMetadataCID] = useState("");
     const [image, setImage] = useState("");
 
     const [event, setEvent] = useState({
         name: '',
-        logo: '', // this will store the metadata URI later
+        logo: '',
         WinnerTokenAmount: '',
         FanTokenAmount: '',
         FanTokenPrice: '',
@@ -35,9 +35,8 @@ const CreateEvent = () => {
         setBannerFile(e.target.files[0]);
     };
 
-    // Converts ipfs:// CID to a gateway URL (you can choose a gateway of your choice)
+    // Converts ipfs:// CID to a gateway URL 
     const convertToGatewayUrl = (ipfsUri) => {
-        // Example: ipfs://CID becomes https://ipfs.io/ipfs/CID
         return ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
     };
   
