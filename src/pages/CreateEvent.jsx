@@ -13,7 +13,7 @@ import { createAndUploadMetadata } from "../utils/UploadMetadataToPinata";
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
     const [bannerFile, setBannerFile] = useState(null);
-    const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
+    const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
     const [metadataCID, setMetadataCID] = useState("");
     const [image, setImage] = useState("");
 

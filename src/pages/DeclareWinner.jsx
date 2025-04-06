@@ -7,7 +7,7 @@ import { WalletContext } from "../context/WalletContext";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
 // Replace with your deployed contract address
-const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
+const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
 
 // Convert an IPFS URI (ipfs://CID) to a gateway URL (using ipfs.io)
 const convertToGatewayUrl = (ipfsUri) => {
