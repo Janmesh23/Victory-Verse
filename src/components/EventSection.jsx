@@ -77,7 +77,7 @@ import EventManagerABI from "../contracts/EventManagerABI.json";
 const EventSection = () => {
   const [userNFTs, setUserNFTs] = useState([]);
   const { walletAddress } = useContext(WalletContext); // using already fetched contract
-  const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
+  const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
 
   useEffect(() => {
     const fetchNFTs = async () => {

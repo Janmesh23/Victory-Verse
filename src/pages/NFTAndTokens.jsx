@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
 // Replace with your deployed contract address
-const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
+const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
 
 // Convert an ipfs:// URI to a gateway URL (using ipfs.io here)
 const convertToGatewayUrl = (ipfsUri) => {

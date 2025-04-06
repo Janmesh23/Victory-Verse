@@ -6,7 +6,7 @@ import Registerbg from "../assets/Register-bg (4).mp4";
 import { WalletContext } from "../context/WalletContext";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
+const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
 
 // Utility to convert an IPFS URI to a gateway URL.
 const convertToGatewayUrl = (ipfsUri) => {
