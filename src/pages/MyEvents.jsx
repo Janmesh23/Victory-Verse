@@ -120,6 +120,7 @@ const MyEvents = () => {
   return (
     <>
       <Navbar />
+      
       <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white p-8">
         <h1 className="text-4xl font-bold text-center text-cyan-400 mb-10 font-SDGlitch">My Events</h1>
 
