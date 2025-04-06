@@ -1,6 +1,6 @@
 # Victory-Verse
 
-website link 🔗 victory-verse.vercel.app 
+Website link 🔗 victory-verse.vercel.app 
 
 # Decentralized Event Rewards Platform 🏆💰
 
