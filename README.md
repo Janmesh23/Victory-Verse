@@ -1,16 +1,6 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 # Victory-Verse
+
+website link 🔗 victory-verse.vercel.app 
 
 # Decentralized Event Rewards Platform 🏆💰
 
@@ -21,24 +11,18 @@ A blockchain-based system that replaces cash prizes with **tradable fan tokens**
 - **Fan Economy**: Fans buy tokens, increasing their value and the winner's net worth
 - **Decentralized**: Powered by Ethereum smart contracts with IPFS storage
 
-## 📌 Problem Solved
-Traditional cash prizes are static. Our system:
-1. Makes rewards appreciate in value via fan participation
-2. Creates ongoing engagement between winners and supporters
-3. Establishes verifiable digital trophies as NFTs
-
 ## 🔄 Workflow
 
 ### For Event Organizers
 1. **Create Event**  
    - Set event name, description, and token price
-   - Upload image to IPFS (gets CID hash)
+   - Upload image to IPFS 
 2. **Register Participants**  
    - Add competitor wallet addresses
 3. **Declare Winner**  
    - Smart contract automatically:
      - Mints NFT trophy to winner
-     - Locks portion of fan tokens as winner's prize
+     - Locks portion of fan tokens as winner's prize .
      - Makes remaining tokens available for public purchase
 
 ### For Fans/Supporters
@@ -52,10 +36,3 @@ Traditional cash prizes are static. Our system:
    - Import to OpenSea/other marketplaces
    - Value increases with more fan participation
 
-## 🛠 Technical Implementation
-
-### Smart Contract Features
-```solidity
-- createEvent(ipfsCID, tokenPrice) → Creates new event NFT
-- declareWinner(eventId) → Distributes rewards
-- purchaseFanTokens(eventId, amount) → Handles token sales
