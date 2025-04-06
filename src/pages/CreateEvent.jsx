@@ -169,7 +169,7 @@ const CreateEvent = () => {
 
                         {/* Fan Token Price */}
                         <div className="space-y-1">
-                            <label className="text-sm text-cyan-300">Fan Token Price (wei)</label>
+                            <label className="text-sm text-cyan-300">Fan Token Price </label>
                             <input
                                 type="number"
                                 name="FanTokenPrice"
