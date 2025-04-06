@@ -16,35 +16,37 @@ const RegisterEvents = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (!window.ethereum) return;
-      try {
-        // Create provider and signer
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
-
-        // Get total number of events
-        const eventCount = await contract.eventCount();
-        const fetchedEvents = [];
-
-        // Loop through events (assuming event IDs start at 1)
-        for (let i = 1; i <= eventCount; i++) {
-          const eventData = await contract.events(i);
-          fetchedEvents.push({
-            id: eventData.id.toString(),
-            creator: eventData.creator,
-            eventName: eventData.eventName,
-            // Assuming your contract stores the logo URL as img_uri
-            img_uri: eventData.img_uri,
-            description: eventData.description,
-            // Add more fields if needed...
-          });
+        if (!window.ethereum) return;
+        try {
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
+      
+          const eventCount = await contract.eventCount();
+          const fetchedEvents = [];
+      
+          for (let i = 1; i <= eventCount; i++) {
+            const eventData = await contract.events(i);
+      
+            // Only include events where winner is NOT declared
+            if (!eventData.winnerDeclared) {
+              fetchedEvents.push({
+                id: eventData.id.toString(),
+                creator: eventData.creator,
+                eventName: eventData.eventName,
+                img_uri: eventData.img_uri,
+                description: eventData.description,
+                winnerDeclared: eventData.winnerDeclared, // in case you want to use it elsewhere
+              });
+            }
+          }
+      
+          setEvents(fetchedEvents);
+        } catch (error) {
+          console.error("Error fetching events:", error);
         }
-        setEvents(fetchedEvents);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
+      };
+      
 
     fetchEvents();
   }, []);

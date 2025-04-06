@@ -114,7 +114,12 @@ const MyEvents = () => {
                 <h3 className="text-xl font-semibold text-cyan-300">{event.name}</h3>
                 <p className="text-sm text-gray-400 mt-1">Event ID: #{event.id}</p>
                 {event.winnerDeclared ? (
-                  <p className="text-green-400 mt-2">Winner Declared</p>
+                  <div className="mt-3 text-green-400">
+                    <p className="font-semibold">✅ Winner Declared</p>
+                    <p className="text-sm text-gray-300 break-all">
+                      👑 {event.winner.slice(0, 6)}...{event.winner.slice(-4)}
+                    </p>
+                  </div>
                 ) : (
                   <button
                     onClick={() => openDeclareWinner(event.id)}
@@ -123,6 +128,7 @@ const MyEvents = () => {
                     Declare Winner
                   </button>
                 )}
+
               </div>
             ))}
           </div>
