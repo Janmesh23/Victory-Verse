@@ -8,7 +8,6 @@ const Footer = () => {
         </div>
       <div className="container mx-auto px-4 flex flex-col items-center">
 
-        {/* Centered Navigation Links */}
         <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-300 mb-6">
           <a href="#about" className="hover:text-purple-400 transition">About</a>
           <a href="#events" className="hover:text-purple-400 transition">Events</a>
@@ -16,7 +15,6 @@ const Footer = () => {
           <a href="#contact" className="hover:text-purple-400 transition">Contact</a>
         </div>
 
-        {/* Bottom-Centered Copyright */}
         <div className="text-xs text-gray-500 text-center">
           &copy; {new Date().getFullYear()} VictoryVerse. All rights reserved.
         </div>

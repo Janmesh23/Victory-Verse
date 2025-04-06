@@ -3,15 +3,12 @@ import { ethers } from "ethers";
 import Navbar from "../components/Navbar";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-// Replace with your deployed contract address
-const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
 
-// Convert an ipfs:// URI to a gateway URL (using ipfs.io here)
 const convertToGatewayUrl = (ipfsUri) => {
   return ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
 };
 
-// Fetch metadata JSON from IPFS and extract the "image" field
 const fetchImageFromMetadata = async (metadataURI) => {
   try {
     const gatewayUrl = convertToGatewayUrl(metadataURI);
@@ -20,7 +17,7 @@ const fetchImageFromMetadata = async (metadataURI) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const metadata = await response.json();
-    return metadata.image; // Return the image URL from the metadata
+    return metadata.image; 
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return null;
@@ -45,10 +42,9 @@ const NFTAndTokens = () => {
         const count = await contract.eventCount();
         const all = [];
 
-        // Loop through each event ID
         for (let i = 1; i <= count; i++) {
           const eventData = await contract.events(i);
-          // Fetch the image URL from metadata
+
           const imageUrl = await fetchImageFromMetadata(eventData.meta_uri);
           all.push({
             id: i,
@@ -70,7 +66,6 @@ const NFTAndTokens = () => {
     fetchEvents();
   }, []);
 
-  // Sort events based on the current sortOrder
   const getSortedEvents = () => {
     switch (sortOrder) {
       case "highToLow":
@@ -103,7 +98,6 @@ const NFTAndTokens = () => {
     }
   };
 
-  // Skeleton loader component
   const SkeletonCard = () => (
     <div className="bg-black bg-opacity-40 rounded-2xl border border-cyan-500 shadow-md p-5 flex flex-col justify-between">
       <div className="w-full h-48 bg-gray-700 rounded-t-2xl animate-pulse"></div>
@@ -120,7 +114,6 @@ const NFTAndTokens = () => {
     </div>
   );
 
-  // Skeleton loader for NFT cards
   const SkeletonNFTCard = () => (
     <div className="bg-black bg-opacity-50 rounded-2xl border border-cyan-700 shadow-md overflow-hidden">
       <div className="w-full h-48 bg-gray-700 animate-pulse"></div>
@@ -154,7 +147,6 @@ const NFTAndTokens = () => {
           </div>
         </section>
 
-        {/* Fan Tokens Section */}
         <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <h2 className="text-5xl text-cyan-300 font-bold mb-4 md:mb-0">Fan Tokens</h2>
@@ -217,7 +209,6 @@ const NFTAndTokens = () => {
           )}
         </div>
 
-        {/* Winner NFTs Section */}
         <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 mb-10 mt-10">
           <h2 className="text-5xl text-cyan-300 font-bold text-center">Winning NFTs</h2>
         </div>

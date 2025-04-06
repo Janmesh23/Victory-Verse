@@ -6,9 +6,8 @@ import Registerbg from "../assets/Register-bg (4).mp4";
 import { WalletContext } from "../context/WalletContext";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
 
-// Utility to convert an IPFS URI to a gateway URL.
 const convertToGatewayUrl = (ipfsUri) => {
   return ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
 };
@@ -21,7 +20,7 @@ const fetchImageFromMetadata = async (metadataURI) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const metadata = await response.json();
-    return metadata.image; // Return the image URL from the metadata
+    return metadata.image; 
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return null;
@@ -44,13 +43,10 @@ const RegisterEvents = () => {
         const eventCount = await contract.eventCount();
         const fetchedEvents = [];
 
-        // Loop through all event IDs (assuming event IDs start at 1)
         for (let i = 1; i <= eventCount; i++) {
           const eventData = await contract.events(i);
 
-          // Only include events where winner is NOT declared
           if (!eventData.winnerDeclared) {
-            // Fetch the image URL from the event's metadata URI
             const img = await fetchImageFromMetadata(eventData.meta_uri);
             fetchedEvents.push({
               id: eventData.id.toString(),
@@ -59,7 +55,7 @@ const RegisterEvents = () => {
               meta_uri: eventData.meta_uri,
               description: eventData.description,
               winnerDeclared: eventData.winnerDeclared,
-              image: img, // store the image URL with the event
+              image: img, 
             });
           }
         }
@@ -72,12 +68,10 @@ const RegisterEvents = () => {
     fetchEvents();
   }, []);
 
-  // Filter events based on search term
   const filteredEvents = events.filter((event) =>
     event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Register for an event using its eventId
   const handleRegister = async (eventId, eventName) => {
     if (!walletAddress) {
       alert("Please connect your wallet first!");
@@ -101,7 +95,6 @@ const RegisterEvents = () => {
     <>
       <Navbar />
 
-      {/* Full-screen background video */}
       <div className="fixed top-0 left-0 w-full h-full z-0 overflow-hidden">
         <video
           src={Registerbg}
@@ -114,8 +107,7 @@ const RegisterEvents = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-blur-sm" />
       </div>
 
-      {/* Content area */}
-      <div className="relative z-10 min-h-screen text-white px-6 py-10">
+      <div className="relative z-5 min-h-screen text-white px-6 py-10">
         <h1 className="text-4xl font-bold mb-10 text-center text-cyan-400 font-SDGlitch">
           Register for Events
         </h1>
@@ -130,7 +122,7 @@ const RegisterEvents = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredEvents.map((event) => (
             <motion.div
               key={event.id}
