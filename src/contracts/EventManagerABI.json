@@ -44,7 +44,7 @@
                 },
                 {
                     "internalType": "string",
-                    "name": "_img_uri",
+                    "name": "_meta_uri",
                     "type": "string"
                 },
                 {
@@ -664,7 +664,7 @@
                 },
                 {
                     "internalType": "string",
-                    "name": "img_uri",
+                    "name": "meta_uri",
                     "type": "string"
                 },
                 {
@@ -729,7 +729,7 @@
                         },
                         {
                             "internalType": "string",
-                            "name": "img_uri",
+                            "name": "meta_uri",
                             "type": "string"
                         },
                         {

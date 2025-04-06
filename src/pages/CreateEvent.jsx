@@ -195,8 +195,9 @@ import { createAndUploadMetadata } from "../utils/UploadMetadataToPinata";
 const CreateEvent = () => {
     const { walletAddress } = useContext(WalletContext);
     const [bannerFile, setBannerFile] = useState(null);
-    const contractAddress = "0xF96ef87aCC8F49a04D1e2BDF4De3949a79deB7C3";
+    const contractAddress = "0xCb27F705662c98F0659f620E3ED73f571b021228";
     const [metadataCID, setMetadataCID] = useState("");
+    const [image, setImage] = useState("");
 
     const [event, setEvent] = useState({
         name: '',
@@ -215,6 +216,13 @@ const CreateEvent = () => {
     const handleFileChange = (e) => {
         setBannerFile(e.target.files[0]);
     };
+
+    // Converts ipfs:// CID to a gateway URL (you can choose a gateway of your choice)
+    const convertToGatewayUrl = (ipfsUri) => {
+        // Example: ipfs://CID becomes https://ipfs.io/ipfs/CID
+        return ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
+    };
+  
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -246,7 +254,6 @@ const CreateEvent = () => {
                 ethers.parseEther(event.WinnerTokenAmount),
                 ethers.parseEther(event.FanTokenAmount),
                 ethers.parseEther(event.FanTokenPrice, "wei"),
-                fileUrl,
                 metadataURI,
                 event.description
             );
