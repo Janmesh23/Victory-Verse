@@ -1,6 +1,6 @@
 import React from "react";
 import herobg from '../assets/hero-bg.mp4'
-import './Hero.css'
+// import './Hero.css'
 import { Link } from "react-router-dom";
 
 const Hero = () => {
