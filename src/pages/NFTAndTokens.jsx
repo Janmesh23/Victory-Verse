@@ -172,7 +172,7 @@ const NFTAndTokens = () => {
                 <div className="mt-4 flex flex-col gap-2">
                   <input
                     type="number"
-                    placeholder="Enter amount"
+                    placeholder="Enter Number of Tokens"
                     value={buyAmounts[event.id] || ""}
                     onChange={(e) => setBuyAmounts({ ...buyAmounts, [event.id]: e.target.value })}
                     className="bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white placeholder-gray-400"
