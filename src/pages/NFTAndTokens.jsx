@@ -248,7 +248,7 @@ const NFTAndTokens = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
           {events.map((event) => (
-            <div key={event.id} className="bg-black bg-opacity-40 rounded-2xl border border-cyan-500 shadow-md p-5 flex flex-col justify-between">
+            <div key={event.id} className="bg-black bg-opacity-40 rounded-2xl border border-cyan-500 shadow-md p-5 flex flex-col justify-between transition-transform duration-300 transform hover:scale-105">
               <img src={event.img} alt={event.name} className="w-full h-48 object-cover rounded-t-2xl" />
               <div>
                 <h3 className="text-xl font-bold text-cyan-200">{event.name}</h3>
@@ -286,7 +286,7 @@ const NFTAndTokens = () => {
           {events
             .filter((e) => e.winner !== "0x0000000000000000000000000000000000000000")
             .map((event) => (
-              <div key={event.id} className="bg-black bg-opacity-50 rounded-2xl border border-cyan-700 shadow-md overflow-hidden">
+              <div key={event.id} className="bg-black bg-opacity-50 rounded-2xl border border-cyan-700 shadow-md overflow-hidden transition-transform duration-300 transform hover:scale-105">
                 <img src={event.img} alt={event.name} className="w-full h-48 object-cover rounded-t-2xl" />
                 <div className="p-4">
                   <h3 className="text-xl text-cyan-300 font-semibold">{event.name}</h3>
