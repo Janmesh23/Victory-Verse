@@ -23,8 +23,9 @@ const App = () => {
           <Route path="/" element={
             <>
               <Navbar/>
+            
               <Hero />
-              
+        
               <Footer />
             </>
           } />
