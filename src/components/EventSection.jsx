@@ -1,78 +1,7 @@
-// import React from 'react';
-// import EventCard from './EventCard';
-// import Hackathon from '../assets/Hackathon.jpg'
-// import Olympic from '../assets/Olympic.jpg'
-// import Marathon from '../assets/marathon.jpeg'
-
-// const pastEvents = [
-//   {
-//     title: 'Olympic Gold - 2024',
-//     date: 'July 28, 2024',
-//     description: 'Honoring the gold medal winner with a rare Victory NFT.',
-//     image : Olympic
-//   },
-//   {
-//     title: 'Hackathon Hero',
-//     date: 'March 15, 2025',
-//     description: 'Celebrating the winner of the national hackathon.',
-//     image: Hackathon
-//   },
-//   {
-//     title: 'Marathon Master',
-//     date: 'October 12, 2024',
-//     description: 'Rewarded for finishing first in the city marathon.',
-//     image: Marathon
-//   }
-// ];
-// const ongoingEvents = [
-//     {
-//       title: "CyberChampionship",
-//       date: "April 5, 2025",
-//       description: "Battle of the best in the ultimate gaming event.",
-      
-//     },
-//     {
-//       title: "Code Clash",
-//       date: "April 10, 2025",
-//       description: "A live coding competition across the country.",
-      
-//     },
-//     {
-//       title: "ArtFusion",
-//       date: "April 12, 2025",
-//       description: "Celebrating NFT artists in a digital metaverse gallery.",
-      
-//     },
-//   ];
-
-//   const EventSection = () => {
-//     return (
-//       <section className="px-8 py-16 bg-[#000000] text-white">
-//         {/* Past Events */}
-//         <h2 className="text-4xl font-extrabold text-center mb-10">Past Events</h2>
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-//           {pastEvents.map((event, index) => (
-//             <EventCard key={index} {...event} />
-//           ))}
-//         </div>
-  
-//         {/* Ongoing Events */}
-//         <h2 className="text-4xl font-extrabold text-center mb-10">Ongoing Events</h2>
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {ongoingEvents.map((event, index) => (
-//             <EventCard key={index} {...event} />
-//           ))}
-//         </div>
-//       </section>
-//     );
-//   };
-
-// export default EventSection;
-
-import React, { useEffect, useState, useContext } from 'react';
-import { WalletContext } from '../context/WalletContext';
+import React, { useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import EventManagerABI from "../contracts/EventManagerABI.json";
+
 
 const EventSection = () => {
   const [userNFTs, setUserNFTs] = useState([]);
@@ -80,58 +9,100 @@ const EventSection = () => {
   const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
 
   useEffect(() => {
-    const fetchNFTs = async () => {
-      if (!walletAddress) return;
-
+    const fetchEvents = async () => {
       try {
         const _provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await _provider.getSigner();
         const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
 
         const eventCount = await contract.eventCount();
-
-        const ownedNFTs = [];
+        const past = [];
+        const ongoing = [];
 
         for (let eventId = 1; eventId <= eventCount; eventId++) {
-          const tokenId = await contract.userNFTs(walletAddress, eventId);
-          if (tokenId.toNumber() > 0) {
-            const eventInfo = await contract.events(eventId);
-            ownedNFTs.push({
-              eventId,
-              tokenId: tokenId.toString(),
-              name: eventInfo.eventName,
-              logo: eventInfo.img_uri,
-            });
+          const eventInfo = await contract.events(eventId);
+          const winner = await contract.winners(eventId);
+
+          const eventData = {
+            id: eventId,
+            name: eventInfo.eventName,
+            image: eventInfo.img_uri,
+            date: new Date(Number(eventInfo.date) * 1000).toLocaleDateString(),
+            winner: winner,
+          };
+          const ZeroAddress = "0x0000000000000000000000000000000000000000";
+
+
+          if (winner !== "0x0000000000000000000000000000000000000000")
+            {
+            past.push(eventData);
+          } else {
+            ongoing.push(eventData);
           }
         }
 
-        setUserNFTs(ownedNFTs);
-      } catch (error) {
-        console.error('Error fetching user NFTs:', error);
+        setPastEvents(past);
+        setOngoingEvents(ongoing);
+      } catch (err) {
+        console.error("Error fetching events: ", err);
       }
     };
 
-    fetchNFTs();
-  }, [walletAddress]);
+    fetchEvents();
+  }, []);
 
   return (
-    <div className="text-white p-6">
-      <h2 className="text-2xl font-bold mb-4">My NFTs</h2>
-      {userNFTs.length === 0 ? (
-        <p>No NFTs found.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {userNFTs.map((nft, index) => (
-            <div key={index} className="bg-gray-900 rounded-xl p-4 shadow-lg">
-              <img src={nft.logo} alt={nft.name} className="w-full h-40 object-cover rounded" />
-              <h3 className="text-xl mt-3 font-semibold">{nft.name}</h3>
-              <p>Event ID: {nft.eventId}</p>
-              <p>Token ID: {nft.tokenId}</p>
-            </div>
-          ))}
+    <section className="px-8 py-16 bg-black text-white">
+      {/* Past Events */}
+      <h2 className="text-4xl font-extrabold text-center mb-10">Past Events</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        {pastEvents.map((event) => (
+          <EventCard key={event.id} {...event} />
+        ))}
+      </div>
+
+      {/* Ongoing Events */}
+      <h2 className="text-4xl font-extrabold text-center mb-10">Ongoing Events</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {ongoingEvents.map((event) => (
+          <EventCard key={event.id} {...event} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const EventCard = ({ name, image, date, id }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <>
+      <div
+        onClick={() => setShowModal(true)}
+        className="bg-white/10 backdrop-blur-md hover:scale-105 transition transform duration-300 shadow-lg rounded-2xl p-4 cursor-pointer"
+      >
+        <img src={image} alt={name} className="w-full h-40 object-cover rounded-xl mb-3" />
+        <h3 className="text-xl font-semibold">{name}</h3>
+        <p className="text-gray-400">Date: {date}</p>
+        <p className="text-sm text-purple-300 mt-1">Event ID: {id}</p>
+      </div>
+
+      {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-black p-6 rounded-xl shadow-2xl border border-purple-600 max-w-sm">
+            <h2 className="text-2xl font-bold mb-2">{name}</h2>
+            <p className="mb-3 text-sm text-gray-400">Date: {date}</p>
+            <img src={image} alt={name} className="w-full h-48 object-cover rounded mb-4" />
+            <button
+              onClick={() => setShowModal(false)}
+              className="mt-2 bg-purple-600 px-4 py-2 rounded hover:bg-purple-700"
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

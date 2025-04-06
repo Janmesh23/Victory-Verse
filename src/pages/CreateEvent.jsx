@@ -92,6 +92,26 @@ const CreateEvent = () => {
                 className="relative min-h-screen bg-cover bg-center bg-no-repeat text-white flex items-center justify-end"
                 style={{ backgroundImage: `url(${bgImage})` }}
             >
+                <div className="absolute left-12 max-w-xl text-left space-y-6">
+                     <motion.h1
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-5xl font-bold text-cyan-400 leading-tight drop-shadow-lg"
+                    >
+                        Welcome to VictoryVerse
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3, duration: 0.8 }}
+                        className="text-lg text-gray-300 max-w-md backdrop-blur-sm bg-black bg-opacity-30 p-4 rounded-lg border border-cyan-800 shadow-md"
+                    >
+                        A decentralized platform where events meet innovation. Create, mint, and showcase your event NFTs in the metaverse. Own your moment. Shape your legacy.
+                    </motion.p>
+                </div>
+
                 <motion.form
                     onSubmit={handleSubmit}
                     initial={{ opacity: 0, y: 20 }}
