@@ -115,7 +115,7 @@ const RegisterEvents = () => {
       </div>
 
       {/* Content area */}
-      <div className="relative z-10 min-h-screen text-white px-6 py-10">
+      <div className="relative z-5 min-h-screen text-white px-6 py-10">
         <h1 className="text-4xl font-bold mb-10 text-center text-cyan-400 font-SDGlitch">
           Register for Events
         </h1>
@@ -130,7 +130,7 @@ const RegisterEvents = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredEvents.map((event) => (
             <motion.div
               key={event.id}
