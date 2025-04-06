@@ -2,7 +2,6 @@ import React from 'react'
 import './index.css';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
-import EventSection from './components/EventSection';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateEvent from './pages/CreateEvent';
