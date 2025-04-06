@@ -26,6 +26,23 @@ const fetchImageFromMetadata = async (metadataURI) => {
   }
 };
 
+// Skeleton Loading Components
+const EventCardSkeleton = () => (
+  <div className="group bg-black/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-gray-900/20 animate-pulse">
+    <div className="relative h-48 w-full bg-gray-700/50"></div>
+    <div className="p-5">
+      <div className="h-6 w-3/4 bg-gray-600/50 rounded mb-4"></div>
+      <div className="h-10 w-full bg-gray-600/50 rounded-lg"></div>
+    </div>
+  </div>
+);
+
+const SectionHeaderSkeleton = () => (
+  <div className="backdrop-blur-md rounded-xl px-4 py-4 mb-10 bg-gradient-to-r from-gray-900/30 via-gray-800/30 to-gray-700/30 border border-gray-700/30 animate-pulse">
+    <div className="h-10 w-1/3 mx-auto bg-gray-600/50 rounded"></div>
+  </div>
+);
+
 const MyEvents = () => {
   const [createdEvents, setCreatedEvents] = useState([]);
   const [participatedEvents, setParticipatedEvents] = useState([]);
@@ -33,22 +50,27 @@ const MyEvents = () => {
   const [participants, setParticipants] = useState([]);
   const [loadingParticipants, setLoadingParticipants] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Get navbar height after render for proper padding
     const navbar = document.querySelector("nav");
     if (navbar) {
       setNavbarHeight(navbar.offsetHeight);
     }
     
     const fetchEvents = async () => {
-      if (!window.ethereum) return;
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const userAddress = await signer.getAddress();
-      const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
-
+      if (!window.ethereum) {
+        setIsLoading(false);
+        return;
+      }
+      
       try {
+        setIsLoading(true);
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const userAddress = await signer.getAddress();
+        const contract = new ethers.Contract(contractAddress, EventManagerABI.abi, signer);
+
         const count = await contract.eventCount();
         const myCreated = [];
         const myParticipated = [];
@@ -80,6 +102,8 @@ const MyEvents = () => {
         setParticipatedEvents(myParticipated);
       } catch (err) {
         console.error("Error fetching events:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -129,7 +153,6 @@ const MyEvents = () => {
       <div
         className="relative z-0 min-h-screen text-white px-6 py-10"
         style={{
-          // backgroundImage: `url('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3000&q=80')`,
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed', 
           backgroundRepeat: 'no-repeat',
@@ -147,16 +170,22 @@ const MyEvents = () => {
 
         {/* Created Events Section */}
         <section className="mb-20">
-          <div className="backdrop-blur-md rounded-xl px-4 py-4 mb-10 bg-gradient-to-r from-indigo-900/30 via-purple-900/30 to-pink-900/30 border border-indigo-800/30">
-            <h2 className="text-4xl font-bold text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300">
-                Created Events
-              </span>
-            </h2>
-          </div>
+          {isLoading ? (
+            <SectionHeaderSkeleton />
+          ) : (
+            <div className="backdrop-blur-md rounded-xl px-4 py-4 mb-10 bg-gradient-to-r from-indigo-900/30 via-purple-900/30 to-pink-900/30 border border-indigo-800/30">
+              <h2 className="text-4xl font-bold text-center">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300">
+                  Created Events
+                </span>
+              </h2>
+            </div>
+          )}
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {createdEvents.length === 0 ? (
+            {isLoading ? (
+              Array(4).fill(0).map((_, idx) => <EventCardSkeleton key={`created-skeleton-${idx}`} />)
+            ) : createdEvents.length === 0 ? (
               <div className="col-span-full text-center py-12 bg-black/20 backdrop-blur-sm rounded-xl">
                 <p className="text-gray-400">You haven't created any events yet</p>
               </div>
@@ -217,16 +246,22 @@ const MyEvents = () => {
 
         {/* Participated Events Section */}
         <section className="mb-16">
-          <div className="backdrop-blur-md rounded-xl px-4 py-4 mb-10 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-fuchsia-900/30 border border-pink-800/30">
-            <h2 className="text-4xl font-bold text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-300">
-                Participated Events
-              </span>
-            </h2>
-          </div>
+          {isLoading ? (
+            <SectionHeaderSkeleton />
+          ) : (
+            <div className="backdrop-blur-md rounded-xl px-4 py-4 mb-10 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-fuchsia-900/30 border border-pink-800/30">
+              <h2 className="text-4xl font-bold text-center">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-300">
+                  Participated Events
+                </span>
+              </h2>
+            </div>
+          )}
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {participatedEvents.length === 0 ? (
+            {isLoading ? (
+              Array(4).fill(0).map((_, idx) => <EventCardSkeleton key={`participated-skeleton-${idx}`} />)
+            ) : participatedEvents.length === 0 ? (
               <div className="col-span-full text-center py-12 bg-black/20 backdrop-blur-sm rounded-xl">
                 <p className="text-gray-400">You haven't participated in any events yet</p>
               </div>

@@ -86,6 +86,7 @@ const CreateEvent = () => {
     return (
         <>
             <Navbar />
+            <br />
 
             <div
                 className="relative min-h-screen bg-cover bg-center bg-no-repeat text-white flex items-center justify-end"
@@ -112,81 +113,146 @@ const CreateEvent = () => {
                 </div>
 
                 <motion.form
-                    onSubmit={handleSubmit}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="backdrop-blur-md bg-black bg-opacity-50 border border-purple-700 rounded-2xl shadow-2xl px-8 py-10 w-full max-w-xl space-y-6 mr-12 mt-20"
-                >
-                    <h2 className="text-3xl font-semibold text-center text-purple-400">Create New Event</h2>
+    onSubmit={handleSubmit}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="backdrop-blur-lg bg-gradient-to-br from-gray-900/70 to-blue-900/50 rounded-3xl shadow-2xl px-10 py-12 w-full max-w-xl space-y-8 mr-12 mt-20 border border-indigo-500/30"
+>
+    <div className="text-center space-y-2">
+        <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+            Create New Event
+        </h2>
+        <p className="text-sm text-gray-400">Shape your event in the metaverse</p>
+    </div>
 
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Event Name"
-                        value={event.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:shadow-lg transition-all duration-300"
-                        required
-                    />
+    <div className="space-y-6">
+        <div className="relative group">
+            <input
+                type="text"
+                name="name"
+                placeholder=" "
+                value={event.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black/30 text-white rounded-xl border border-gray-700 focus:border-cyan-400 focus:ring-0 peer transition-all duration-300"
+                required
+            />
+            <label className="absolute left-3 top-3 text-gray-400 pointer-events-none transition-all duration-300 
+                            peer-placeholder-shown:text-base peer-placeholder-shown:top-3
+                            peer-focus:-top-2 peer-focus:text-xs peer-focus:text-cyan-300
+                            -top-2 text-xs ">
+                Event Name
+            </label>
+        </div>
 
-                    <input
-                        type="number"
-                        name="WinnerTokenAmount"
-                        placeholder="Winner Token Amount"
-                        value={event.WinnerTokenAmount}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        required
-                    />
+        <div className="grid grid-cols-2 gap-4">
+            <div className="relative group">
+                <input
+                    type="number"
+                    name="WinnerTokenAmount"
+                    placeholder=" "
+                    value={event.WinnerTokenAmount}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-black/30 text-white rounded-xl border border-gray-700 focus:border-cyan-400 focus:ring-0 peer"
+                    required
+                />
+                <label className="absolute left-3 top-3 text-gray-400 pointer-events-none transition-all duration-300 
+                                peer-placeholder-shown:text-base peer-placeholder-shown:top-3
+                                peer-focus:-top-2 peer-focus:text-xs peer-focus:text-cyan-300
+                                -top-2 text-xs ">
+                    Winner Token Amount
+                </label>
+            </div>
 
-                    <input
-                        type="number"
-                        name="FanTokenAmount"
-                        placeholder="Fan Token Amount"
-                        value={event.FanTokenAmount}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        required
-                    />
+            <div className="relative group">
+                <input
+                    type="number"
+                    name="FanTokenAmount"
+                    placeholder=" "
+                    value={event.FanTokenAmount}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-black/30 text-white rounded-xl border border-gray-700 focus:border-cyan-400 focus:ring-0 peer"
+                    required
+                />
+                <label className="absolute left-3 top-3 text-gray-400 pointer-events-none transition-all duration-300 
+                                peer-placeholder-shown:text-base peer-placeholder-shown:top-3
+                                peer-focus:-top-2 peer-focus:text-xs peer-focus:text-cyan-300
+                                -top-2 text-xs ">
+                    Fan Token Amount
+                </label>
+            </div>
+        </div>
 
-                    <input
-                        type="number"
-                        name="FanTokenPrice"
-                        placeholder="Fan Token Price"
-                        value={event.FanTokenPrice}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        required
-                    />
+        <div className="relative group">
+            <input
+                type="number"
+                name="FanTokenPrice"
+                placeholder=" "
+                value={event.FanTokenPrice}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black/30 text-white rounded-xl border border-gray-700 focus:border-cyan-400 focus:ring-0 peer"
+                required
+            />
+            <label className="absolute left-3 top-3 text-gray-400 pointer-events-none transition-all duration-300 
+                            peer-placeholder-shown:text-base peer-placeholder-shown:top-3
+                            peer-focus:-top-2 peer-focus:text-xs peer-focus:text-cyan-300
+                            -top-2 text-xs ">
+                Fan Token Price 
+            </label>
+        </div>
 
-                    <textarea
-                        name="description"
-                        placeholder="Event Description"
-                        value={event.description}
-                        onChange={handleChange}
-                        rows="4"
-                        className="w-full px-4 py-2 bg-black bg-opacity-30 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        required
-                    ></textarea>
+        <div className="relative group">
+            <textarea
+                name="description"
+                placeholder=" "
+                value={event.description}
+                onChange={handleChange}
+                rows="4"
+                className="w-full px-4 py-3 bg-black/30 text-white rounded-xl border border-gray-700 focus:border-cyan-400 focus:ring-0 peer resize-none"
+                required
+            ></textarea>
+            <label className="absolute left-3 top-3 text-gray-400 pointer-events-none transition-all duration-300 
+                            peer-placeholder-shown:text-base peer-placeholder-shown:top-3
+                            peer-focus:-top-2 peer-focus:text-xs peer-focus:text-cyan-300
+                            -top-2 text-xs ">
+                Event Description
+            </label>
+        </div>
 
-                    <div className='flex justify-between items-center'>
-                        <label className="block text-sm text-gray-400 mb-1">Upload Banner (optional)</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            className="block w-full text-sm text-gray-400 bg-black bg-opacity-30 border border-gray-600 rounded-lg p-2"
-                        />
+        <div className="space-y-2">
+            <label className="block text-sm text-cyan-300">Event Banner</label>
+            <div className="flex items-center justify-center w-full">
+                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer bg-black/20 hover:border-cyan-400 transition">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        {bannerFile ? (
+                            <p className="text-sm text-gray-400">{bannerFile.name}</p>
+                        ) : (
+                            <>
+                                <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                </svg>
+                                <p className="text-sm text-gray-400">Click to upload</p>
+                            </>
+                        )}
                     </div>
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleFileChange} 
+                        className="hidden" 
+                    />
+                </label>
+            </div>
+        </div>
+    </div>
 
-                    <button
-                        type="submit"
-                        className="w-full py-2 bg-purple-600 hover:bg-purple-700 transition rounded-lg font-semibold shadow-md"
-                    >
-                        Create Event
-                    </button>
-                </motion.form>
+    <button
+        type="submit"
+        className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-300/50"
+    >
+        Create Event
+    </button>
+</motion.form>
             </div>
         </>
     );

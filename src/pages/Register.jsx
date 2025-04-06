@@ -20,7 +20,7 @@ const fetchImageFromMetadata = async (metadataURI) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const metadata = await response.json();
-    return metadata.image; 
+    return metadata.image;
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return null;
@@ -55,7 +55,7 @@ const RegisterEvents = () => {
               meta_uri: eventData.meta_uri,
               description: eventData.description,
               winnerDeclared: eventData.winnerDeclared,
-              image: img, 
+              image: img,
             });
           }
         }
@@ -104,13 +104,18 @@ const RegisterEvents = () => {
           playsInline
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-blur-sm" />
+
       </div>
 
       <div className="relative z-5 min-h-screen text-white px-6 py-10">
-        <h1 className="text-4xl font-bold mb-10 text-center text-cyan-400 font-SDGlitch">
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-10 text-center font-zentry mt-12 "
+        >
           Register for Events
-        </h1>
+        </motion.h1>
 
         <div className="flex flex-col md:flex-row mb-10 items-start md:items-center gap-6">
           <input
