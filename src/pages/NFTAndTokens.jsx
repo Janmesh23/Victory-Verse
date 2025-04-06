@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import Navbar from "../components/Navbar";
 import EventManagerABI from "../contracts/EventManagerABI.json";
 
-const contractAddress = "0xd23D5CA18541789329D48CFDDEd9eb802Ca55096";
+const contractAddress = "0xfCE92d5Ae12694Bf335f85f415093fC8efEEF135";
 
 const convertToGatewayUrl = (ipfsUri) => ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
 
