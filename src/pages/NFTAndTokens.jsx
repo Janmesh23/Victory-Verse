@@ -106,9 +106,9 @@ const NFTAndTokens = () => {
       <div className="px-6 py-10" style={{ paddingTop: `calc(${navbarHeight}px + 2rem)` }}>
         <section className="mb-16">
         <div className="relative mb-8">
-          <h2 className="text-3xl font-bold text-center">🎫 Fan Tokens</h2>
+          <h2 className="text-5xl font-bold text-center font-circular-web">🎫 Fan Tokens</h2>
           <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2">
-            <label htmlFor="sort" className="text-gray-300">Sort by price:</label>
+            <label htmlFor="sort" className="text-gray-300 font-circular-web">Sort by price:</label>
             <select
               id="sort"
               value={sortOrder}
@@ -156,7 +156,7 @@ const NFTAndTokens = () => {
                     />
                     <button
                       onClick={() => handleBuyTokens(event.id, event.tokenPrice)}
-                      className="bg-blue-600 hover:bg-blue-500 text-white rounded-md py-2 font-medium"
+                      className="bg-blue-600 hover:bg-blue-500 text-white rounded-md py-2 font-medium font-circular-web"
                     >
                       Buy Tokens
                     </button>
@@ -169,7 +169,7 @@ const NFTAndTokens = () => {
 
         {/* NFT WINNERS SECTION */}
         <section>
-          <h2 className="text-3xl font-bold mb-8 text-center">🏆 NFTs Minted to Winners</h2>
+          <h2 className="text-5xl font-bold mb-8 text-center font-robert-medium">🏆 NFTs Minted to Winners</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {loading ? (
               Array(4).fill(0).map((_, index) => (
